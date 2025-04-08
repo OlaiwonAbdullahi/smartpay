@@ -1,0 +1,30 @@
+@import url("https://fonts.googleapis.com/css2?family=Sora:wght@100..800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Afacad+Flux:wght@100..1000&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --font-sora: sora, "sans-serif";
+  --font-afacad: afacad flux, "sans-serif";
+  --color-primary: #e7b100;
+  --color-bg: #151515;
+  --color-secondary: #000000;
+  --color-text: #ffffff;
+}
+* {
+  background-color: var(--color-bg);
+  font-family: var(--font-afacad);
+}
+@layer utilities {
+  .bg-primary {
+    background-color: var(--color-primary);
+  }
+  .text-primary {
+    color: var(--color-primary);
+  }
+  .text-text {
+    color: var(--color-text);
+  }
+}
+.bg-primary {
+  background-color: var(--color-primary);
+}
