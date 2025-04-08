@@ -1,8 +1,8 @@
-import React from "react";
-import { CiGrid41, CiVideoOn } from "react-icons/ci";
+import { CiGrid41, CiSettings, CiVideoOn } from "react-icons/ci";
 import { LiaWalletSolid } from "react-icons/lia";
 import { TbSmartHome } from "react-icons/tb";
 import { PiGiftThin } from "react-icons/pi";
+import { GrAnalytics } from "react-icons/gr";
 
 const Menu = () => {
   return (
@@ -18,10 +18,10 @@ const Menu = () => {
           <LiaWalletSolid className=" size-5 text-primary" />
         </li>
         <li>
-          <CiGrid41 className=" size-5 text-primary" />
+          <GrAnalytics className=" size-5 text-primary" />
         </li>
         <li>
-          <CiVideoOn className=" size-5 text-primary" />
+          <CiSettings className=" size-5 text-primary" />
         </li>
       </ul>
     </div>
