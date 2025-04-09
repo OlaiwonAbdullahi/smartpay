@@ -4,7 +4,7 @@ import WalletCard from "../components/walletCard";
 
 const DashboardHome = () => {
   return (
-    <div className="flex flex-col gap-4 w-full p-3.5 ">
+    <div className="flex flex-col gap-4 w-full p-3.5">
       {" "}
       <WalletCard />
       <ServiceCard />

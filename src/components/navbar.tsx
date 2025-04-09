@@ -10,14 +10,14 @@ const Navbar = () => {
   const navLinks = ["Home", "About", "Features", "Contact"];
 
   return (
-    <nav className="bg-white rounded-full top-0 sticky w-11/12 md:w-4/5 mx-auto mt-2 p-2 flex justify-between items-center z-50">
+    <nav className="bg-bg rounded-full top-0 sticky w-11/12 md:w-4/5 mx-auto mt-2 p-2 flex justify-between items-center z-50">
       <Link to="/">
         <div className="text-xl font-semibold text-text font-sora">
           SmartPay
         </div>
       </Link>
 
-      <ul className="hidden md:flex gap-6 text-sm font-medium bg-bg text-white">
+      <ul className="hidden md:flex gap-6 text-sm font-normal bg-bgNav p-1.5 px-2 rounded-full text-white">
         {navLinks.map((link) => (
           <li
             key={link}

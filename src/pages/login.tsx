@@ -37,7 +37,7 @@ const Login = () => {
   };
 
   return (
-    <div className="bg-gray-900 w-full flex items-center justify-center mx-auto h-screen">
+    <div className="bg-bg w-full flex items-center justify-center mx-auto h-screen">
       <div className="bg-opacity-10 bg-clip-padding backdrop-filter backdrop-blur-sm rounded-lg border border-primary p-6 flex flex-col text-center items-center md:w-1/3 w-full gap-6 m-4 md:m-0">
         <div className="flex flex-col items-center gap-2">
           <h2 className="text-2xl font-ubuntu font-medium text-primary">
