@@ -37,7 +37,7 @@ const ServiceItem = ({ name, icon }) => (
 
 const ServiceCard = () => {
   return (
-    <div className="flex flex-col gap-4 w-full max-w-md mx-auto p-6 rounded-lg shadow-md border border-primary z-20 bg-[#1a1a1a]">
+    <div className="flex flex-col gap-4 w-full max-w-md  mx-auto p-6 rounded-lg shadow-md border border-primary z-20 bg-[#1a1a1a]">
       <div className="flex justify-between items-center">
         <span className="text-gray-400 text-sm">Quick Service</span>
         <span className="flex items-center gap-1 text-gray-300 text-sm cursor-pointer hover:text-white transition">
@@ -45,10 +45,12 @@ const ServiceCard = () => {
         </span>
       </div>
 
-      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-5 justify-center">
-        {services.map((service, index) => (
-          <ServiceItem key={index} name={service.name} icon={service.icon} />
-        ))}
+      <div className="w-full flex justify-center">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 gap-5 place-items-center">
+          {services.map((service, index) => (
+            <ServiceItem key={index} name={service.name} icon={service.icon} />
+          ))}
+        </div>
       </div>
     </div>
   );
