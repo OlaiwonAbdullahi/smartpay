@@ -11,7 +11,6 @@
   --color-text: #ffffff;
 }
 * {
-  background-color: var(--color-bg);
   font-family: var(--font-afacad);
 }
 @layer utilities {

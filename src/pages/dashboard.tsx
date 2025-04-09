@@ -1,12 +1,12 @@
 import DashboardNavbar from "../components/dashboardNavbar";
 import Menu from "../components/menu";
-import WalletCard from "../components/walletCard";
+import DashboardHome from "./dashboardHome";
 
 const Dashboard = () => {
   return (
     <div>
       <DashboardNavbar />
-      <WalletCard />
+      <DashboardHome />
       <Menu />
     </div>
   );

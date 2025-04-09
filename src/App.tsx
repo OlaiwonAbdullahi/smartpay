@@ -23,7 +23,7 @@ const AppContent = () => {
   const shouldHideNavbar = hideNavbarRoutes.includes(location.pathname);
 
   return (
-    <div className="bg-[#f9f9ff] pt-2.5">
+    <div className="bg-bg pt-2.5">
       {!shouldHideNavbar && <Navbar />}
       <Routes>
         <Route path="/" element={<Home />} />
