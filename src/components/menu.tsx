@@ -1,7 +1,6 @@
 import { CiSettings } from "react-icons/ci";
 import { LiaWalletSolid } from "react-icons/lia";
 import { TbInvoice, TbSmartHome } from "react-icons/tb";
-import { GrAnalytics } from "react-icons/gr";
 import { Link } from "react-router-dom";
 
 const Menu = () => {

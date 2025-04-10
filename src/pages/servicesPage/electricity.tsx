@@ -10,7 +10,7 @@ const Electricity = () => {
   const [amount, setAmount] = useState("");
   const [type, setType] = useState(""); // Prepaid/Postpaid
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log({ disco, meterNo, amount, type });
     // Connect with iSquareData or any API

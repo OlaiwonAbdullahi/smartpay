@@ -2,18 +2,23 @@ import { useState } from "react";
 import { BsArrowLeft } from "react-icons/bs";
 import { Link } from "react-router-dom";
 
-const cableProviders = {
+// Define the types for cable providers and plans
+type CableProviders = {
+  [key: string]: string[]; // Allows dynamic access to providers and their respective plans
+};
+
+const cableProviders: CableProviders = {
   GoTV: ["Jolli - ₦2,460", "Max - ₦3,600", "Supa - ₦5,500"],
   DStv: ["Padi - ₦2,500", "Yanga - ₦3,500", "Confam - ₦6,200"],
   Startimes: ["Basic - ₦1,300", "Smart - ₦1,800", "Super - ₦3,000"],
 };
 
 const CablePurchase = () => {
-  const [provider, setProvider] = useState("");
-  const [plan, setPlan] = useState("");
-  const [smartCard, setSmartCard] = useState("");
+  const [provider, setProvider] = useState<string>("");
+  const [plan, setPlan] = useState<string>("");
+  const [smartCard, setSmartCard] = useState<string>("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log({ provider, plan, smartCard });
     // Submit to backend/API
@@ -39,7 +44,7 @@ const CablePurchase = () => {
               value={provider}
               onChange={(e) => {
                 setProvider(e.target.value);
-                setPlan("");
+                setPlan(""); // Reset plan when provider changes
               }}
               required
               className="p-2 rounded-md border bg-bgNav border-gray-300 focus:ring-2 focus:ring-primary"
@@ -68,11 +73,14 @@ const CablePurchase = () => {
                 <option value="" disabled>
                   Select plan
                 </option>
-                {cableProviders[provider].map((p, i) => (
-                  <option key={i} value={p}>
-                    {p}
-                  </option>
-                ))}
+                {/* Ensure to type `provider` safely */}
+                {cableProviders[provider as keyof CableProviders].map(
+                  (p: string, i: number) => (
+                    <option key={i} value={p}>
+                      {p}
+                    </option>
+                  )
+                )}
               </select>
             </div>
           )}

@@ -6,14 +6,17 @@ import glo from "../../assets/networkLogo/glo.svg";
 import airtel from "../../assets/networkLogo/airtel.svg";
 import mobile from "../../assets/networkLogo/9mobile.svg";
 
-const dataPlans = {
+// Define a type for the network
+type Network = "MTN" | "Airtel" | "Glo" | "9mobile";
+
+const dataPlans: Record<Network, string[]> = {
   MTN: ["500MB - ₦100", "1GB - ₦200", "2GB - ₦500"],
   Airtel: ["500MB - ₦100", "1.5GB - ₦300", "3GB - ₦700"],
   Glo: ["1GB - ₦200", "2.5GB - ₦500", "4.1GB - ₦1000"],
   "9mobile": ["500MB - ₦100", "1.5GB - ₦300", "3GB - ₦700"],
 };
 
-const networkLogos = {
+const networkLogos: Record<Network, string> = {
   MTN: mtn,
   Airtel: airtel,
   Glo: glo,
@@ -21,11 +24,11 @@ const networkLogos = {
 };
 
 const DataPurchase = () => {
-  const [network, setNetwork] = useState("");
+  const [network, setNetwork] = useState<Network | "">(""); // network is typed as 'Network' or an empty string
   const [phone, setPhone] = useState("");
   const [plan, setPlan] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log({ network, phone, plan });
     // Hook to API goes here
@@ -47,23 +50,30 @@ const DataPurchase = () => {
           <div className="flex flex-col text-gray-500">
             <label className="text-sm text-gray-200 mb-1">Select Network</label>
             <div className="flex gap-2 mt-1 items-center flex-wrap">
-              {Object.keys(networkLogos).map((net) => (
-                <button
-                  key={net}
-                  type="button"
-                  onClick={() => {
-                    setNetwork(net);
-                    setPlan("");
-                  }}
-                  className={`border rounded-md p-1 flex items-center justify-center size-12 transition duration-200 ${
-                    network === net
-                      ? "border-primary bg-primary/10"
-                      : "border-primary/40"
-                  }`}
-                >
-                  <img src={networkLogos[net]} alt={net} className="size-7" />
-                </button>
-              ))}
+              {Object.keys(networkLogos).map((net) => {
+                const networkKey = net as Network; // Cast string to Network type
+                return (
+                  <button
+                    key={networkKey}
+                    type="button"
+                    onClick={() => {
+                      setNetwork(networkKey);
+                      setPlan("");
+                    }}
+                    className={`border rounded-md p-1 flex items-center justify-center size-12 transition duration-200 ${
+                      network === networkKey
+                        ? "border-primary bg-primary/10"
+                        : "border-primary/40"
+                    }`}
+                  >
+                    <img
+                      src={networkLogos[networkKey]}
+                      alt={networkKey}
+                      className="size-7"
+                    />
+                  </button>
+                );
+              })}
             </div>
           </div>
 

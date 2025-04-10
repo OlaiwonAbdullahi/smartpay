@@ -13,12 +13,14 @@ const Signup = () => {
   const [tel, setTel] = useState("");
   const [error, setError] = useState("");
 
-  const validateEmail = (email) => {
+  // Adding type annotation for email
+  const validateEmail = (email: string) => {
     const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return pattern.test(email);
   };
 
-  const handleSignup = (e) => {
+  // Adding type annotation for event (e)
+  const handleSignup = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError("");
 

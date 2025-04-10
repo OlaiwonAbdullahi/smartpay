@@ -18,7 +18,7 @@ const Airtime = () => {
   const [phone, setPhone] = useState("");
   const [amount, setAmount] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log({ network, phone, amount });
   };

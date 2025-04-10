@@ -5,7 +5,6 @@ import {
   Navigate,
   useLocation,
 } from "react-router-dom";
-import { useEffect, useState } from "react";
 
 import Home from "./pages/home";
 import Login from "./pages/login";

@@ -8,12 +8,12 @@ const Wallet = () => {
   const [showBalance, setShowBalance] = useState(true);
   const [copiedText, setCopiedText] = useState("");
 
-  const walletBalance = 50000; // Replace with actual balance
+  const walletBalance = 50000;
 
-  const copyToClipboard = (text) => {
+  const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text);
     setCopiedText(text);
-    setTimeout(() => setCopiedText(""), 2000); // Clear copied text after 2s
+    setTimeout(() => setCopiedText(""), 2000);
   };
 
   return (

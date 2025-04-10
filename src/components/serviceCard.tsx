@@ -8,8 +8,16 @@ import {
 
 import { PiGraduationCap, PiTelevisionSimpleThin } from "react-icons/pi";
 import { Link } from "react-router-dom";
+import { ReactNode } from "react";
 
-const services = [
+// Define props type
+type ServiceItemProps = {
+  name: string;
+  icon: ReactNode;
+  link: string;
+};
+
+const services: ServiceItemProps[] = [
   {
     name: "Airtime",
     icon: (
@@ -54,7 +62,7 @@ const services = [
   },
 ];
 
-const ServiceItem = ({ name, icon, link }) => (
+const ServiceItem = ({ name, icon, link }: ServiceItemProps) => (
   <Link to={link}>
     <div className="border border-primary/5 w-28 p-3 text-center gap-2 flex flex-col rounded-md shadow-md hover:bg-primary/10 transition duration-300">
       {icon}

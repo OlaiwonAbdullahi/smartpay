@@ -9,7 +9,7 @@ const WalletCard = () => {
 
   const walletBalance = 50000; // Replace with real balance
 
-  const copyToClipboard = (text) => {
+  const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text);
     setCopiedText(text);
     setTimeout(() => setCopiedText(""), 2000); // Clear after 2 seconds
