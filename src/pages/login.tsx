@@ -79,12 +79,14 @@ const Login = () => {
 
           {error && <p className="text-red-500 text-sm font-pop">{error}</p>}
 
-          <button
-            type="submit"
-            className="bg-primary p-2 text-white font-pop rounded-md cursor-pointer hover:bg-primary-dark hover:text-white active:scale-95 transition-all duration-300 ease-in-out"
-          >
-            Log In
-          </button>
+          <Link to="/dashboard">
+            <button
+              type="submit"
+              className="bg-primary p-2 text-white w-full rounded-md cursor-pointer hover:bg-primary-dark hover:text-white active:scale-95 transition-all duration-300 ease-in-out"
+            >
+              Log In
+            </button>
+          </Link>
         </form>
 
         <div className="w-full flex items-center gap-4">
