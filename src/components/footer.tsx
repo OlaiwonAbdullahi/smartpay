@@ -1,12 +1,13 @@
-import React from "react";
+import { BsEnvelope } from "react-icons/bs";
+import { CiFacebook, CiInstagram, CiPhone, CiTwitter } from "react-icons/ci";
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-900 text-white py-10">
+    <footer className="bg-bgNav/20 text-white py-10">
       <div className="max-w-screen-xl mx-auto px-6 text-center">
         <div className="mb-6">
-          <h3 className="text-2xl font-bold">SmartPay</h3>
-          <p className="text-gray-400 mt-2">
+          <h3 className="text-2xl font-bold text-left">SmartPay</h3>
+          <p className="text-gray-400 mt-2 text-left">
             Your secure and fast payment solution.
           </p>
         </div>
@@ -16,17 +17,22 @@ const Footer = () => {
             <ul className="text-gray-400">
               <li>
                 <a href="#" className="hover:text-blue-500">
+                  Home
+                </a>
+              </li>
+              <li>
+                <a href="#" className="hover:text-blue-500">
                   About Us
                 </a>
               </li>
               <li>
                 <a href="#" className="hover:text-blue-500">
-                  Careers
+                  Features
                 </a>
               </li>
               <li>
                 <a href="#" className="hover:text-blue-500">
-                  Blog
+                  Contact
                 </a>
               </li>
             </ul>
@@ -54,33 +60,38 @@ const Footer = () => {
           <div>
             <h4 className="text-lg font-semibold mb-4">Contact</h4>
             <ul className="text-gray-400">
-              <li>Email: support@smartpay.com</li>
-              <li>Phone: 1-800-123-4567</li>
+              <li className=" flex items-center justify-center gap-2.5">
+                <BsEnvelope /> support@smartpay.com
+              </li>
+              <li className=" flex items-center justify-center gap-2.5">
+                <CiPhone />
+                1-800-123-4567
+              </li>
             </ul>
           </div>
           <div>
             <h4 className="text-lg font-semibold mb-4">Follow Us</h4>
-            <ul className="flex space-x-4 text-gray-400">
+            <ul className="flex space-x-4 text-gray-400 justify-center">
               <li>
                 <a href="#" className="hover:text-blue-500">
-                  Facebook
+                  <CiFacebook className=" size-6" />
                 </a>
               </li>
               <li>
                 <a href="#" className="hover:text-blue-500">
-                  Twitter
+                  <CiTwitter className=" size-6" />
                 </a>
               </li>
               <li>
                 <a href="#" className="hover:text-blue-500">
-                  Instagram
+                  <CiInstagram className=" size-6" />
                 </a>
               </li>
             </ul>
           </div>
         </div>
         <div className="text-gray-400 text-sm">
-          &copy; 2025 SmartPay. All Rights Reserved.
+          &copy; {new Date().getFullYear()} SmartPay. All Rights Reserved.
         </div>
       </div>
     </footer>

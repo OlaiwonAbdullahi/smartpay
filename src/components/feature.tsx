@@ -1,7 +1,12 @@
+import { ReactElement } from "react";
+import { BsPhone, BsWifi } from "react-icons/bs";
+import { LiaLightbulb } from "react-icons/lia";
+import { PiGraduationCap, PiTelevisionSimpleThin } from "react-icons/pi";
+import { TbGiftCard } from "react-icons/tb";
 interface ServiceCardProps {
   feature: string;
   description: string;
-  icon: string;
+  icon: ReactElement;
   bgColor: string;
 }
 
@@ -13,13 +18,17 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
 }) => {
   return (
     <div
-      className={`flex flex-col items-center justify-center p-6 rounded-lg shadow-lg transition-all ${bgColor} hover:scale-105`}
+      className={`flex flex-col items-center justify-center p-6 rounded-lg shadow-lg transition-all bg-bgNav hover:scale-105`}
     >
-      <div className="w-16 h-16 flex items-center justify-center rounded-full bg-white shadow-md mb-4 self-start">
-        <img src={icon} alt={feature} className="w-8 h-8" />
+      <div
+        className={`w-14 h-14 flex items-center justify-center rounded-xl ${bgColor} shadow-md mb-4 self-start`}
+      >
+        {icon}
       </div>
-      <h3 className="text-xl font-semibold text-white mb-2">{feature}</h3>
-      <p className="text-center text-gray-200">{description}</p>
+      <h3 className="text-xl font-semibold text-white mb-2 text-left flex self-start">
+        {feature}
+      </h3>
+      <p className="text-left text-gray-200">{description}</p>
     </div>
   );
 };
@@ -30,35 +39,42 @@ const FeaturesSection = () => {
       feature: "Airtime Top-Up",
       description:
         "Easily top up your mobile phone with airtime from your wallet.",
-      icon: "/icons/bill-payment-icon.svg",
-      bgColor: "bg-blue-500",
+      icon: <BsPhone className=" text-blue-700 size-7" />,
+      bgColor: "bg-blue-700/20",
     },
     {
       feature: "Data Bundle Purchase",
       description:
         "Purchase data bundles for your mobile device directly from your wallet.",
-      icon: "/icons/wallet-icon.svg",
-      bgColor: "bg-green-500",
+      icon: <BsWifi className=" text-red-700 size-7" />,
+      bgColor: "bg-red-700/20",
     },
     {
       feature: "Electricity Bill Payment",
       description:
         "Pay your electricity bills conveniently through our platform.",
-      icon: "/icons/history-icon.svg",
-      bgColor: "bg-orange-500",
+      icon: <LiaLightbulb className=" text-primary size-7" />,
+      bgColor: "bg-primary/20",
     },
     {
       feature: "Cable TV Subscription",
       description: "Subscribe to your favorite cable TV channels with ease.",
-      icon: "/icons/history-icon.svg",
-      bgColor: "bg-orange-500",
+      icon: <PiTelevisionSimpleThin className=" text-purple-700 size-7" />,
+      bgColor: "bg-purple-700/20",
     },
     {
       feature: "Education",
       description:
         "Pay your electricity bills conveniently through our platform.",
-      icon: "/icons/history-icon.svg",
-      bgColor: "bg-orange-500",
+      icon: <PiGraduationCap className=" text-green-700 size-7" />,
+      bgColor: "bg-green-700/20",
+    },
+    {
+      feature: "GiftCard",
+      description:
+        "Buy Your Giftcard for your loved ones conveniently through our platform.",
+      icon: <TbGiftCard className=" text-pink-700 size-7" />,
+      bgColor: "bg-pink-700/20",
     },
   ];
 

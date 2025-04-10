@@ -28,7 +28,7 @@ const ServiceItem = ({ name, icon, link }: ServiceItemProps) => (
   <Link to={link}>
     <div className="border border-primary/5 md:w-28 w-26 md:p-3 p-1.5 text-center gap-2 flex flex-col rounded-md shadow-md hover:bg-primary/10 transition duration-300">
       {icon}
-      <span className="text-white text-sm text-wrap">{name}</span>
+      <span className="text-white text-sm  whitespace-nowrap">{name}</span>
     </div>
   </Link>
 );

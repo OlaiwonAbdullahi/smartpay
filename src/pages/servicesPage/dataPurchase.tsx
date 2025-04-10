@@ -24,10 +24,9 @@ const networkLogos: Record<Network, string> = {
 };
 
 const DataPurchase = () => {
-  const [network, setNetwork] = useState<Network | "">(""); // network is typed as 'Network' or an empty string
+  const [network, setNetwork] = useState<Network | "">("");
   const [phone, setPhone] = useState("");
   const [plan, setPlan] = useState("");
-  const [dataPlansFetched, setDataPlansFetched] = useState(false);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -42,7 +41,7 @@ const DataPurchase = () => {
           {
             method: "GET",
             headers: {
-              Authorization: "Basic " + btoa("test:test"), // Basic Authentication with username 'test' and password 'test'
+              Authorization: "Basic " + btoa("test:test"),
             },
           }
         );
@@ -50,7 +49,7 @@ const DataPurchase = () => {
         if (response.ok) {
           const data = await response.json();
           console.log(data);
-          setDataPlansFetched(true); // Set state to indicate data plans are fetched
+          // TODO: Replace hardcoded dataPlans with data from API if needed
         } else {
           console.error("Failed to fetch data:", response.status);
         }
@@ -79,7 +78,7 @@ const DataPurchase = () => {
             <label className="text-sm text-gray-200 mb-1">Select Network</label>
             <div className="flex gap-2 mt-1 items-center flex-wrap">
               {Object.keys(networkLogos).map((net) => {
-                const networkKey = net as Network; // Cast string to Network type
+                const networkKey = net as Network;
                 return (
                   <button
                     key={networkKey}

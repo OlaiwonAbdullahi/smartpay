@@ -40,7 +40,7 @@ const services: ServiceItemProps[] = [
     link: "/electricity",
   },
   {
-    name: "Airtime2Cash",
+    name: "Airtime to Cash",
     icon: (
       <BsArrowLeftRight className="text-blue-700 size-6 mx-auto  bg-blue-700/20 rounded-md p-1" />
     ),
