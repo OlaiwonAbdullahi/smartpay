@@ -6,7 +6,12 @@ import glo from "../../assets/networkLogo/glo.svg";
 import airtel from "../../assets/networkLogo/airtel.svg";
 import mobile from "../../assets/networkLogo/9mobile.svg";
 
-const networks = ["MTN", "Airtel", "Glo", "9mobile"];
+const networkLogos = [
+  { name: "MTN", logo: mtn },
+  { name: "Glo", logo: glo },
+  { name: "Airtel", logo: airtel },
+  { name: "9mobile", logo: mobile },
+];
 
 const Airtime = () => {
   const [network, setNetwork] = useState("");
@@ -19,51 +24,40 @@ const Airtime = () => {
   };
 
   return (
-    <div className=" p-3.5  flex flex-col gap-3.5 h-screen items-center bg-bg">
-      <div className=" flex justify-between items-center w-full max-w-md mx-auto p-2 bg-bgNav rounded-xl shadow-lg">
+    <div className="p-3.5 flex flex-col gap-3.5 h-screen items-center bg-bg">
+      {/* Header */}
+      <div className="flex justify-between items-center w-full max-w-md mx-auto p-2 bg-bgNav rounded-xl shadow-lg">
         <Link to="/dashboard">
           <BsArrowLeft className="text-text text-2xl cursor-pointer bg-primary/20 rounded-full p-1 border border-primary" />
         </Link>
-        <span className=" text-text">Airtime</span>
+        <span className="text-text">Airtime</span>
         <div className=""></div>
       </div>
+
+      {/* Form Card */}
       <div className="max-w-md w-full mx-auto p-6 bg-bgNav rounded-xl shadow-lg border border-primary/20">
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+          {/* Network Selection */}
           <div className="flex flex-col text-gray-500">
             <label className="text-sm text-gray-500">Select Network</label>
-
-            <select
-              value={network}
-              onChange={(e) => setNetwork(e.target.value)}
-              className="p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary"
-              required
-            >
-              <option value="" disabled>
-                Select a network
-              </option>
-              {networks.map((net) => (
-                <option key={net} value={net} className=" bg-bgNav">
-                  {net}
-                </option>
+            <div className="flex gap-3 mt-2 items-center flex-wrap">
+              {networkLogos.map((net) => (
+                <div
+                  key={net.name}
+                  onClick={() => setNetwork(net.name)}
+                  className={`cursor-pointer border ${
+                    network === net.name
+                      ? "border-primary bg-primary/10"
+                      : "border-primary/40"
+                  } rounded-md p-1 flex items-center justify-center size-10 transition duration-200`}
+                >
+                  <img src={net.logo} alt={net.name} className="size-7" />
+                </div>
               ))}
-            </select>
-
-            <div className=" flex gap-2 mt-2 items-center">
-              <div className=" border border-primary/40 rounded-md p-1 flex items-center justify-center">
-                <img src={mtn} alt="" className=" size-10" />
-              </div>
-              <div className="  border border-primary/40 rounded-md p-1 flex items-center justify-center  size-10">
-                <img src={glo} alt="" className=" size-6" />
-              </div>
-              <div className="  border border-primary/40 rounded-md p-1 flex items-center justify-center  size-10">
-                <img src={airtel} alt="" className=" size-6" />
-              </div>
-              <div className="  border border-primary/40 rounded-md p-1 flex items-center justify-center size-10">
-                <img src={mobile} alt="" className=" size-6" />
-              </div>
             </div>
           </div>
 
+          {/* Phone Input */}
           <div className="flex flex-col">
             <label className="text-sm text-gray-500">Phone Number</label>
             <input
@@ -76,7 +70,7 @@ const Airtime = () => {
             />
           </div>
 
-          {/* Amount */}
+          {/* Amount Input */}
           <div className="flex flex-col">
             <label className="text-sm text-gray-500">Amount (₦)</label>
             <input
