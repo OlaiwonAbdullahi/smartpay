@@ -12,7 +12,7 @@
   --color-text: #ffffff;
 }
 * {
-  font-family: var(--font-afacad);
+  font-family: var(--font-afacad), "Courier New", Courier, monospace;
 }
 @layer utilities {
   .bg-primary {

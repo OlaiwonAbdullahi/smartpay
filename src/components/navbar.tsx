@@ -55,7 +55,7 @@ const Navbar = () => {
 
       {/* Mobile Nav */}
       {isOpen && (
-        <ul className=" absolute top-full left-0 w-full bg-white mt-2 rounded-xl shadow-md p-4 flex flex-col gap-4 md:hidden text-sm font-medium text-gray-700">
+        <ul className=" absolute top-full left-0 w-full bg-bgNav mt-2 rounded-xl shadow-md p-4 flex flex-col gap-4 md:hidden text-sm font-medium text-gray-400">
           {navLinks.map((link) => (
             <li
               key={link}
