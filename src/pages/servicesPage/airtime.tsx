@@ -49,7 +49,7 @@ const Airtime = () => {
                     network === net.name
                       ? "border-primary bg-primary/10"
                       : "border-primary/40"
-                  } rounded-md p-1 flex items-center justify-center size-10 transition duration-200`}
+                  } rounded-md p-2 flex items-center justify-center size-10 transition duration-200`}
                 >
                   <img src={net.logo} alt={net.name} className="size-7" />
                 </div>

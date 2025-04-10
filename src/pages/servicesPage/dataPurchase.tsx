@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BsArrowLeft } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import mtn from "../../assets/networkLogo/mtn.svg";
@@ -27,12 +27,40 @@ const DataPurchase = () => {
   const [network, setNetwork] = useState<Network | "">(""); // network is typed as 'Network' or an empty string
   const [phone, setPhone] = useState("");
   const [plan, setPlan] = useState("");
+  const [dataPlansFetched, setDataPlansFetched] = useState(false);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log({ network, phone, plan });
-    // Hook to API goes here
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          "https://isquaredata.com/api/data/services/",
+          {
+            method: "GET",
+            headers: {
+              Authorization: "Basic " + btoa("test:test"), // Basic Authentication with username 'test' and password 'test'
+            },
+          }
+        );
+
+        if (response.ok) {
+          const data = await response.json();
+          console.log(data);
+          setDataPlansFetched(true); // Set state to indicate data plans are fetched
+        } else {
+          console.error("Failed to fetch data:", response.status);
+        }
+      } catch (error) {
+        console.error("Error fetching data plans:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <div className="p-3.5 flex flex-col gap-3.5 h-screen items-center bg-bg">
