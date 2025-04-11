@@ -113,7 +113,7 @@ const Signup = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              className="bg-transparent placeholder:text-gray-500 placeholder:font-pop font-pop text-sm w-full outline-none"
+              className="bg-transparent placeholder:text-gray-500 placeholder:font-pop text-gray-500 font-pop text-sm w-full outline-none"
             />
           </div>
 

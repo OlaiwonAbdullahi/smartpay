@@ -16,22 +16,22 @@ const Footer = () => {
             <h4 className="text-lg font-semibold mb-4">Company</h4>
             <ul className="text-gray-400">
               <li>
-                <a href="#" className="hover:text-blue-500">
+                <a href="#" className="hover:text-primary">
                   Home
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-blue-500">
+                <a href="#" className="hover:text-primary">
                   About Us
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-blue-500">
+                <a href="#" className="hover:text-primary">
                   Features
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-blue-500">
+                <a href="#" className="hover:text-primary">
                   Contact
                 </a>
               </li>
@@ -41,17 +41,17 @@ const Footer = () => {
             <h4 className="text-lg font-semibold mb-4">Support</h4>
             <ul className="text-gray-400">
               <li>
-                <a href="#" className="hover:text-blue-500">
+                <a href="#" className="hover:text-primary">
                   Help Center
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-blue-500">
+                <a href="#" className="hover:text-primary">
                   Privacy Policy
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-blue-500">
+                <a href="#" className="hover:text-primary">
                   Terms of Service
                 </a>
               </li>
@@ -73,17 +73,17 @@ const Footer = () => {
             <h4 className="text-lg font-semibold mb-4">Follow Us</h4>
             <ul className="flex space-x-4 text-gray-400 justify-center">
               <li>
-                <a href="#" className="hover:text-blue-500">
+                <a href="#" className="hover:text-primary">
                   <CiFacebook className=" size-6" />
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-blue-500">
+                <a href="#" className="hover:text-primary">
                   <CiTwitter className=" size-6" />
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-blue-500">
+                <a href="#" className="hover:text-primary">
                   <CiInstagram className=" size-6" />
                 </a>
               </li>

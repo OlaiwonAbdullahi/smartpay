@@ -65,7 +65,7 @@ const FeaturesSection = () => {
     {
       feature: "Education",
       description:
-        "Pay your electricity bills conveniently through our platform.",
+        " Pay your school fees and other educational expenses conveniently.",
       icon: <PiGraduationCap className=" text-green-700 size-7" />,
       bgColor: "bg-green-700/20",
     },
