@@ -4,6 +4,7 @@ import { BsSendArrowUp } from "react-icons/bs";
 import { CiWarning } from "react-icons/ci";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { PiDotsThreeVerticalBold, PiEye, PiEyeSlash } from "react-icons/pi";
+import { Link } from "react-router-dom";
 
 const WalletCard = () => {
   const [showBalance, setShowBalance] = useState(true);
@@ -22,25 +23,29 @@ const WalletCard = () => {
       <div className="flex flex-col gap-4 w-full max-w-md mx-auto p-3 rounded-lg shadow-md border border-primary z-20 bg-[#1a1a1a]">
         <h2 className="text-sm text-text font-light">Wallet Balance</h2>
         <div className="flex justify-between items-start mb-4">
-          {/* Balance Section */}
-          <div className="flex gap-2.5 items-center">
-            {showBalance ? (
-              <span className="text-text text-3xl font-medium">
-                ₦{walletBalance.toLocaleString()}.00
-              </span>
-            ) : (
-              <span className="text-text text-3xl font-medium">****</span>
-            )}
-            <button
-              className="text-lg font-bold text-gray-800 cursor-pointer"
-              onClick={() => setShowBalance(!showBalance)}
-            >
-              {!showBalance ? (
-                <PiEye className="w-6 h-6 text-gray-500" />
+          <div className="">
+            <div className="flex gap-2.5 items-center">
+              {showBalance ? (
+                <span className="text-text text-3xl font-medium">
+                  ₦{walletBalance.toLocaleString()}.00
+                </span>
               ) : (
-                <PiEyeSlash className="w-6 h-6 text-gray-500" />
+                <span className="text-text text-3xl font-medium">****</span>
               )}
-            </button>
+              <button
+                className="text-lg font-bold text-gray-800 cursor-pointer"
+                onClick={() => setShowBalance(!showBalance)}
+              >
+                {!showBalance ? (
+                  <PiEye className="w-6 h-6 text-gray-500" />
+                ) : (
+                  <PiEyeSlash className="w-6 h-6 text-gray-500" />
+                )}
+              </button>
+            </div>
+            <span className=" text-gray-500">
+              SmartPoint: <span className="text-primary">₦234.45</span>
+            </span>
           </div>
 
           {/* KYC Warning Section */}
@@ -84,10 +89,12 @@ const WalletCard = () => {
 
         {/* Action Buttons */}
         <div className="flex items-center justify-center gap-2.5">
-          <button className="flex gap-1 whitespace-nowrap items-center border border-primary text-gray-400 py-2 px-4 rounded hover:bg-primary/20 transition duration-300">
-            <IoIosAddCircleOutline className="text-2xl text-gray-400" />
-            Add Funds
-          </button>
+          <Link to="/fund">
+            <button className="flex gap-1 whitespace-nowrap items-center border border-primary text-gray-400 py-2 px-4 rounded hover:bg-primary/20 transition duration-300">
+              <IoIosAddCircleOutline className="text-2xl text-gray-400" />
+              Add Funds
+            </button>
+          </Link>
           <button className="flex gap-1 items-center border border-primary text-gray-400 py-2 px-4 rounded hover:bg-primary/20 transition duration-300">
             <BsSendArrowUp className="size-5 text-gray-400" />
             Withdraw

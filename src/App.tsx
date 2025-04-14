@@ -16,6 +16,7 @@ import DataPurchase from "./pages/servicesPage/dataPurchase";
 import CablePurchase from "./pages/servicesPage/cablePurchase";
 import Electricity from "./pages/servicesPage/electricity";
 import Pay from "./pages/pay";
+import FundWallet from "./pages/fundWallet";
 import Menu from "./components/menu";
 import Education from "./pages/servicesPage/education";
 import Wallet from "./pages/wallet";
@@ -38,6 +39,7 @@ const AppContent = () => {
     "/pay",
     "/wallet",
     "/settings",
+    "/fund",
   ];
 
   const shouldHideNavbar = hideNavbarRoutes.includes(location.pathname);
@@ -62,6 +64,7 @@ const AppContent = () => {
             <Route path="/pay" element={<Pay />} />
             <Route path="/wallet" element={<Wallet />} />
             <Route path="/settings" element={<Settings />} />
+            <Route path="/fund" element={<FundWallet />} />
           </Route>
 
           <Route path="*" element={<Navigate to="/notfound" />} />
