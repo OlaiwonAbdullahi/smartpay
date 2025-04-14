@@ -9,6 +9,7 @@ import { createUserWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import toast from "react-hot-toast";
 import { auth, db, googleProvider } from "./firebase"; // Adjust the import path as needed
 import { setDoc, doc, getDoc } from "firebase/firestore";
+
 const Signup = () => {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
@@ -16,6 +17,7 @@ const Signup = () => {
   const [tel, setTel] = useState("");
   const [error, setError] = useState("");
 
+  const navigate = useNavigate();
   // Adding type annotation for email
   const validateEmail = (email: string) => {
     const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -45,8 +47,8 @@ const Signup = () => {
     try {
       await createUserWithEmailAndPassword(auth, email, password);
       const user = auth.currentUser;
-      console.log(user);
-      console.log("User created successfully!");
+      // console.log(user);
+      //console.log("User created successfully!");
       toast.success("Signup successful!", {
         position: "top-center",
         iconTheme: {
@@ -54,6 +56,7 @@ const Signup = () => {
           secondary: "#151515",
         },
       });
+      navigate("/login");
       if (user) {
         await setDoc(doc(db, "users", user.uid), {
           fullName: fullName,
@@ -78,7 +81,6 @@ const Signup = () => {
       });
     }
   };
-  const navigate = useNavigate();
 
   const handleGoogleLogin = async () => {
     try {
@@ -99,7 +101,7 @@ const Signup = () => {
       }
 
       toast.success("Logged in with Google!", { position: "top-center" });
-      navigate("/dashboard");
+      navigate("/login");
     } catch (error: any) {
       toast.error(error.message, { position: "top-center" });
     }
