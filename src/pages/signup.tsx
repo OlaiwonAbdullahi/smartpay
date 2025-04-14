@@ -2,10 +2,13 @@ import { useState } from "react";
 import { CiMail, CiUser } from "react-icons/ci";
 import { MdOutlinePassword } from "react-icons/md";
 import { FcGoogle } from "react-icons/fc";
-import { BsApple, BsPhone } from "react-icons/bs";
-import { FaXTwitter } from "react-icons/fa6";
-import { Link } from "react-router-dom";
+import { BsPhone } from "react-icons/bs";
 
+import { Link, useNavigate } from "react-router-dom";
+import { createUserWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import toast from "react-hot-toast";
+import { auth, db, googleProvider } from "./firebase"; // Adjust the import path as needed
+import { setDoc, doc, getDoc } from "firebase/firestore";
 const Signup = () => {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
@@ -20,7 +23,7 @@ const Signup = () => {
   };
 
   // Adding type annotation for event (e)
-  const handleSignup = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSignup = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError("");
 
@@ -39,11 +42,67 @@ const Signup = () => {
       return;
     }
 
-    // You can replace this with a real sign-up function later
-    console.log("Name:", fullName);
-    console.log("Email:", email);
-    console.log("Password:", password);
-    alert("Signup successful!");
+    try {
+      await createUserWithEmailAndPassword(auth, email, password);
+      const user = auth.currentUser;
+      console.log(user);
+      console.log("User created successfully!");
+      toast.success("Signup successful!", {
+        position: "top-center",
+        iconTheme: {
+          primary: "#e7b100",
+          secondary: "#151515",
+        },
+      });
+      if (user) {
+        await setDoc(doc(db, "users", user.uid), {
+          fullName: fullName,
+          email: email,
+          tel: tel,
+          createdAt: new Date().toISOString(),
+        });
+      }
+    } catch (error) {
+      console.log(error);
+
+      let message = "An error occurred";
+
+      if (error instanceof Error) {
+        message = error.message;
+      } else if (typeof error === "string") {
+        message = error;
+      }
+
+      toast.error(message, {
+        position: "top-center",
+      });
+    }
+  };
+  const navigate = useNavigate();
+
+  const handleGoogleLogin = async () => {
+    try {
+      const result = await signInWithPopup(auth, googleProvider);
+      const user = result.user;
+
+      // Check if user already exists in Firestore
+      const userRef = doc(db, "users", user.uid);
+      const userSnap = await getDoc(userRef);
+
+      if (!userSnap.exists()) {
+        await setDoc(userRef, {
+          fullName: user.displayName,
+          email: user.email,
+          tel: user.phoneNumber || "",
+          createdAt: new Date().toISOString(),
+        });
+      }
+
+      toast.success("Logged in with Google!", { position: "top-center" });
+      navigate("/dashboard");
+    } catch (error: any) {
+      toast.error(error.message, { position: "top-center" });
+    }
   };
 
   return (
@@ -128,20 +187,18 @@ const Signup = () => {
         </form>
 
         <div className="w-full flex items-center gap-4">
-          <hr className="flex-grow border-t border-text" />
-          <span className="text-text font-pop text-sm">or</span>
-          <hr className="flex-grow border-t border-text" />
+          <hr className="flex-grow border-t border-text/20" />
+          <span className="text-text/50 font-pop text-sm">or</span>
+          <hr className="flex-grow border-t border-text/20" />
         </div>
 
-        <div className="flex gap-6">
-          <div className="bg-transparent border-2 border-primary p-2 rounded-md cursor-pointer hover:bg-primary">
-            <BsApple className="h-6 w-6 text-white" />
-          </div>
-          <div className="bg-transparent border-2 border-primary p-2 rounded-md cursor-pointer hover:bg-primary">
+        <div className="flex">
+          <div
+            onClick={handleGoogleLogin}
+            className="bg-transparent gap-2.5 flex items-center border text-text w-full border-primary p-2 rounded-md cursor-pointer hover:bg-primary/20"
+          >
             <FcGoogle className="h-6 w-6" />
-          </div>
-          <div className="bg-transparent border-2 border-primary p-2 rounded-md cursor-pointer hover:bg-primary">
-            <FaXTwitter className="h-6 w-6 text-white" />
+            Sign in with Google
           </div>
         </div>
       </div>

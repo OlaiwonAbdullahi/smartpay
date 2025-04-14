@@ -2,23 +2,30 @@ import { useState } from "react";
 import { CiMail } from "react-icons/ci";
 import { MdOutlinePassword } from "react-icons/md";
 import { FcGoogle } from "react-icons/fc";
-import { BsApple } from "react-icons/bs";
-import { FaXTwitter } from "react-icons/fa6";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
+import {
+  signInWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithPopup,
+} from "firebase/auth";
+import { auth, db } from "./firebase";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
+  const navigate = useNavigate();
+
   const validateEmail = (email: string): boolean => {
     const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return pattern.test(email);
   };
 
-  const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     setError("");
 
     if (!validateEmail(email)) {
@@ -31,10 +38,63 @@ const Login = () => {
       return;
     }
 
-    // Proceed with login (for now, just log the inputs)
-    console.log("Email:", email);
-    console.log("Password:", password);
-    alert("Login successful!");
+    try {
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const user = userCredential.user;
+
+      const userDocRef = doc(db, "users", user.uid);
+      const userDoc = await getDoc(userDocRef);
+
+      if (userDoc.exists()) {
+        const userData = userDoc.data();
+        console.log("User data from Firestore:", userData);
+        toast.success("Login successful!", { position: "top-center" });
+        navigate("/dashboard");
+      } else {
+        toast.error("No user data found in Firestore.", {
+          position: "top-center",
+        });
+      }
+    } catch (error: any) {
+      console.error("Login Error:", error.message);
+      toast.error(error.message || "An error occurred during login.", {
+        position: "top-center",
+      });
+    }
+  };
+
+  const handleGoogleLogin = async () => {
+    const provider = new GoogleAuthProvider();
+
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+
+      const userRef = doc(db, "users", user.uid);
+      const userSnap = await getDoc(userRef);
+
+      if (!userSnap.exists()) {
+        await setDoc(userRef, {
+          uid: user.uid,
+          name: user.displayName,
+          email: user.email,
+          photoURL: user.photoURL,
+          createdAt: new Date(),
+        });
+      }
+
+      toast.success("Logged in with Google!", { position: "top-center" });
+      navigate("/dashboard");
+    } catch (error: any) {
+      console.error("Google login error:", error.message);
+      toast.error(error.message || "Google login failed", {
+        position: "top-center",
+      });
+    }
   };
 
   return (
@@ -79,31 +139,27 @@ const Login = () => {
 
           {error && <p className="text-red-500 text-sm font-pop">{error}</p>}
 
-          <Link to="/dashboard">
-            <button
-              type="submit"
-              className="bg-primary p-2 text-white w-full rounded-md cursor-pointer hover:bg-primary-dark hover:text-white active:scale-95 transition-all duration-300 ease-in-out"
-            >
-              Log In
-            </button>
-          </Link>
+          <button
+            type="submit"
+            className="bg-primary p-2 text-white w-full rounded-md cursor-pointer hover:bg-primary-dark hover:text-white active:scale-95 transition-all duration-300 ease-in-out"
+          >
+            Log In
+          </button>
         </form>
 
         <div className="w-full flex items-center gap-4">
-          <hr className="flex-grow border-t border-text" />
-          <span className="text-text font-pop text-sm">or</span>
-          <hr className="flex-grow border-t border-text" />
+          <hr className="flex-grow border-t border-text/20" />
+          <span className="text-text/20 font-pop text-sm">or</span>
+          <hr className="flex-grow border-t border-text/20" />
         </div>
 
         <div className="flex gap-6">
-          <div className="bg-transparent border-2 border-primary p-2 rounded-md cursor-pointer hover:bg-primary">
-            <BsApple className="h-6 w-6 text-white" />
-          </div>
-          <div className="bg-transparent border-2 border-primary p-2 rounded-md cursor-pointer hover:bg-primary">
+          <div
+            onClick={handleGoogleLogin}
+            className="bg-transparent w-full flex gap-2.5 text-text items-center border border-primary p-2 rounded-md cursor-pointer hover:bg-primary/20"
+          >
             <FcGoogle className="h-6 w-6" />
-          </div>
-          <div className="bg-transparent border-2 border-primary p-2 rounded-md cursor-pointer hover:bg-primary">
-            <FaXTwitter className="h-6 w-6 text-white" />
+            Sign in with Google
           </div>
         </div>
       </div>

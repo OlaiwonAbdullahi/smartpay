@@ -20,6 +20,9 @@ import Menu from "./components/menu";
 import Education from "./pages/servicesPage/education";
 import Wallet from "./pages/wallet";
 import Settings from "./pages/settings";
+import { Toaster } from "react-hot-toast";
+import PrivateRoutes from "./utils/privateRoutes";
+import { AuthProvider } from "./utils/AuthContext";
 
 // Wrapper to use hooks outside <Router>
 const AppContent = () => {
@@ -41,24 +44,32 @@ const AppContent = () => {
 
   return (
     <div className="bg-bg pt-2.5">
-      {!shouldHideNavbar && <Navbar />}
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/airtime" element={<Airtime />} />
-        <Route path="/data" element={<DataPurchase />} />
-        <Route path="/cable" element={<CablePurchase />} />
-        <Route path="/electricity" element={<Electricity />} />
-        <Route path="/education" element={<Education />} />
-        <Route path="/pay" element={<Pay />} />
-        <Route path="/wallet" element={<Wallet />} />
-        <Route path="/Settings" element={<Settings />} />
+      <AuthProvider>
+        {!shouldHideNavbar && <Navbar />}
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
 
-        <Route path="*" element={<Navigate to="/notfound" />} />
-      </Routes>
-      {shouldHideNavbar && <Menu />}
+          {/* Protected routes */}
+          <Route element={<PrivateRoutes />}>
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/airtime" element={<Airtime />} />
+            <Route path="/data" element={<DataPurchase />} />
+            <Route path="/cable" element={<CablePurchase />} />
+            <Route path="/electricity" element={<Electricity />} />
+            <Route path="/education" element={<Education />} />
+            <Route path="/pay" element={<Pay />} />
+            <Route path="/wallet" element={<Wallet />} />
+            <Route path="/settings" element={<Settings />} />
+          </Route>
+
+          <Route path="*" element={<Navigate to="/notfound" />} />
+        </Routes>
+
+        {shouldHideNavbar && <Menu />}
+        <Toaster />
+      </AuthProvider>
     </div>
   );
 };
