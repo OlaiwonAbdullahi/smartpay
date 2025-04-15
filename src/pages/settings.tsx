@@ -1,6 +1,8 @@
-import { BsArrowLeft } from "react-icons/bs";
+import { BsArrowLeft, BsArrowRight, BsShield } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { GoVerified } from "react-icons/go";
+import { CiCreditCard1, CiLock, CiLogout, CiUser } from "react-icons/ci";
+import { AiOutlineUserDelete } from "react-icons/ai";
 
 const Settings = () => {
   return (
@@ -34,10 +36,81 @@ const Settings = () => {
             </div>
           </div>
         </div>
+        <div className=" text-gray-500">Account</div>
         <div className="bg-bgNav  text-white rounded-lg flex flex-col gap-3.5  p-4">
-          {" "}
+          <div className=" flex items-center justify-between">
+            <div className=" flex items-center gap-1.5">
+              <span>
+                <CiUser />
+              </span>
+              <span>Profile Details</span>
+            </div>
+            <div className=" bg-primary/10 p-1 rounded-full border border-primary/40">
+              <BsArrowRight />
+            </div>
+          </div>
+          <div className=" flex items-center justify-between">
+            <div className=" flex items-center gap-1.5">
+              <span>
+                <CiCreditCard1 />
+              </span>
+              <span>Request Account Number</span>
+            </div>
+            <div className=" bg-primary/10 p-1 rounded-full border border-primary/40">
+              <BsArrowRight />
+            </div>
+          </div>
+          <div className=" flex items-center justify-between">
+            <div className=" flex items-center gap-1.5">
+              <span>
+                <BsShield />
+              </span>
+              <span>KYC</span>
+            </div>
+            <div className=" bg-primary/10 p-1 rounded-full border border-primary/40">
+              <BsArrowRight />
+            </div>
+          </div>
+        </div>
+
+        <div className=" text-gray-500">Security</div>
+        <div className="bg-bgNav  text-white rounded-lg flex flex-col gap-3.5  p-4">
+          <div className=" flex items-center justify-between">
+            <div className=" flex items-center gap-1.5">
+              <span>
+                <CiLock />
+              </span>
+              <span>Change Password</span>
+            </div>
+            <div className=" bg-primary/10 p-1 rounded-full border border-primary/40">
+              <BsArrowRight />
+            </div>
+          </div>
+          <div className=" flex items-center justify-between">
+            <div className=" flex items-center gap-1.5">
+              <span>
+                <AiOutlineUserDelete />
+              </span>
+              <span>Delete Account</span>
+            </div>
+            <div className=" bg-primary/10 p-1 rounded-full border border-primary/40">
+              <BsArrowRight />
+            </div>
+          </div>
+          <div className=" flex items-center justify-between">
+            <div className=" flex items-center gap-1.5">
+              <span>
+                <CiLogout />
+              </span>
+              <span>Logout</span>
+            </div>
+            <div className=" bg-primary/10 p-1 rounded-full border border-primary/40">
+              <BsArrowRight />
+            </div>
+          </div>
         </div>
       </div>
+      <div className=" text-center text-gray-500">v1.0</div>
     </div>
   );
 };
