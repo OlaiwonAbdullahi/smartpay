@@ -1,5 +1,4 @@
 import { BsBell } from "react-icons/bs";
-import { CiUser } from "react-icons/ci";
 import { Link } from "react-router-dom";
 import { useAuth } from "../utils/AuthContext";
 import { GoVerified } from "react-icons/go";
