@@ -2,6 +2,7 @@ import { BsBell } from "react-icons/bs";
 import { CiUser } from "react-icons/ci";
 import { Link } from "react-router-dom";
 import { useAuth } from "../utils/AuthContext";
+import { GoVerified } from "react-icons/go";
 
 const DashboardNavbar = () => {
   const { user } = useAuth();
@@ -11,8 +12,8 @@ const DashboardNavbar = () => {
   return (
     <div className="flex justify-between md:w-11/12 w-full mx-auto items-center p-3 mb-3.5">
       <Link to="/settings">
-        <div className="flex items-center text-primary gap-2.5">
-          <div className=" p-2 rounded-full">
+        <div className="flex items-center text-primary gap-1">
+          <div className=" p-1 rounded-full">
             <img
               src={user?.photoURL || "https://fakeimg.pl/600x400"}
               alt="User Avatar"
@@ -21,7 +22,10 @@ const DashboardNavbar = () => {
           </div>
           <div className="flex flex-col">
             <span className="text-sm text-gray-500">Hey,</span>
-            <span className="font-medium">{user.displayName}</span>
+            <div className=" flex items-center gap-1.5">
+              <span className="">{user.displayName}</span>
+              <GoVerified className="text-primary" />
+            </div>
           </div>
         </div>
       </Link>
