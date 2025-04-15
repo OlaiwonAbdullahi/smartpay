@@ -11,8 +11,9 @@ const Hero = () => {
         {/* Left Content */}
         <div className="w-full md:w-1/2 flex flex-col gap-5">
           <h1 className="text-3xl md:text-4xl font-bold text-white md:text-left text-center leading-tight font-sora">
-            <span className=" text-primary">Simplifying</span> Bill Payments,{" "}
-            <span className=" text-primary">Empowering</span> Your Wallet.
+            A <span className=" text-primary">smarter</span> and more{" "}
+            <span className=" text-primary">rewarding</span> way to
+            make payments
           </h1>
           <p className="text-gray-500 text-sm md:text-base leading-relaxed max-w-md md:text-left text-center">
             SmartPay makes it easier than ever to manage and pay your bills.
