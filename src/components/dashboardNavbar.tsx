@@ -1,50 +1,27 @@
 import { BsBell } from "react-icons/bs";
 import { CiUser } from "react-icons/ci";
-import { useState, useEffect } from "react";
-import { auth, db } from "../pages/firebase";
-import { doc, getDoc } from "firebase/firestore";
-import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
+import { useAuth } from "../utils/AuthContext";
 
 const DashboardNavbar = () => {
-  const [userName, setUserName] = useState<string | null>(null);
+  const { user } = useAuth();
 
-  useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const currentUser = auth.currentUser;
-        if (currentUser) {
-          const userDocRef = doc(db, "users", currentUser.uid);
-          const userSnap = await getDoc(userDocRef);
-
-          if (userSnap.exists()) {
-            const data = userSnap.data();
-            setUserName(data.fullName || "User"); // or however the name field is stored
-          } else {
-            toast.error("User data not found in Firestore");
-          }
-        }
-      } catch (error) {
-        console.error("Error fetching user data:", error);
-        toast.error("Failed to fetch user data");
-      }
-    };
-
-    fetchUserData();
-  }, []);
-
-  if (!userName) return null;
+  if (!user) return null;
 
   return (
     <div className="flex justify-between md:w-11/12 w-full mx-auto items-center p-3 mb-3.5">
       <Link to="/settings">
         <div className="flex items-center text-primary gap-2.5">
-          <div className="border-primary/45 border p-2 rounded-full">
-            <CiUser className="w-7 h-7 text-primary" />
+          <div className=" p-2 rounded-full">
+            <img
+              src={user?.photoURL || "https://fakeimg.pl/600x400"}
+              alt="User Avatar"
+              className="size-10 rounded-full"
+            />
           </div>
           <div className="flex flex-col">
             <span className="text-sm text-gray-500">Hey,</span>
-            <span className="font-medium">{userName}</span>
+            <span className="font-medium">{user.displayName}</span>
           </div>
         </div>
       </Link>
